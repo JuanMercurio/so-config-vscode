@@ -1,0 +1,84 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Project Run con Valgrind",
+            "type": "shell",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "tp"
+            },
+            "command": "make clean && make memcheck",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Project Run con Helgrind",
+            "type": "shell",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "tp"
+            },
+            "command": "make clean && make helgrind",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Project Run",
+            "type": "shell",
+            "command": "make clean && make all && ./bin/${workspaceFolderBasename}",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "tp"
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": ["relative"]
+            },
+        },
+        {
+            "label": "Project Build",
+            "type": "shell",
+            "command": "make clean && make all",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Project Test",
+            "type": "shell",
+            "command": "make all && ./bin/project test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true,
+                "group": "test"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
