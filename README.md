@@ -9,7 +9,7 @@ El makefile es el de [so-project-template](https://github.com/RaniAgus/so-projec
 
 ### Correr dentro de  VSCode
 
-En cada modulo esta la carpeta **.vscode** y dentro tiene el archivo **tasks.json**. Este archivo nos permite basicamente automatizar cualquier cosa. Para no usar la consola externa se crean 5 tareas por modulo:
+En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.json``. Este archivo nos permite basicamente automatizar cualquier cosa. Para no usar la consola externa se crean 5 tareas por modulo:
 
 - *Modulo Build*
 - *Modulo Run*
@@ -19,7 +19,7 @@ En cada modulo esta la carpeta **.vscode** y dentro tiene el archivo **tasks.jso
 
 Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea**
 
-Lo mas conveniente es crear un par de Keybinds en el archivo **keybindings.json** para hacer todo mas rapido, como por ejemplo: 
+Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`` para hacer todo mas rapido, como por ejemplo: 
 
 ```json
 /* Atajos para TP - Operativos*/
@@ -54,12 +54,12 @@ Lo mas conveniente es crear un par de Keybinds en el archivo **keybindings.json*
 
 ### Debug en VSCode
 
-El archivo **launch.json** es el que nos deja debuggear en VSCode. Con solo apretar F5 se puede Debuggear
+El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apretar **F5** se puede Debuggear
 
 
 ### Correr en Consola Externa
 
-Si en una terminal dentro de un modulo hacemos **make help**, se imprime:
+Si en una terminal dentro de un modulo hacemos ``make help``, se imprime:
 
 ```bash
  make / make all -- Build project using debug flags.
@@ -70,16 +70,15 @@ Si en una terminal dentro de un modulo hacemos **make help**, se imprime:
  make test       -- Run Project Tests
  make run        -- Run Project
 ```
-Si no gusta el **make run** siempre se puede **./bin/binario**
+Si no gusta el ``make run`` siempre se puede ``./bin/binario``
 
 
 
 # Datos Importantes
 
-- Siempre hacer **make clean** antes de hacer un *commit/push*. Asi no hay archivos innecesarios en el repositorio *(ej: el .log de valgrind)*. 
-- No agregar al commit o hacer **checkout** de los archivos que no son necesarios actualizar y pueden crear conflictos absurdos. Ejemplo cuando hay cambios en el log y el config:
+- Siempre hacer ``make clean`` antes de hacer un *commit/push*. Asi no hay archivos innecesarios en el repositorio *(ej: el .log de valgrind)*. 
+- No agregar al commit o hacer ``checkout`` de los archivos que no son necesarios actualizar y pueden crear conflictos absurdos. Ejemplo cuando hay cambios en el log y el config:
 ```bash
 git checkout project/cfg project2/cfg 
 ```
-
 
