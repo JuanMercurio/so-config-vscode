@@ -1,11 +1,11 @@
 # Config Inicial
 
 - Instalar ultima version de [VSCode de 32bit](https://code.visualstudio.com/updates/v1_35) 
-- Instalar extension: C/C++ Intelisense en VSCode
+- Instalar extension: **C/C++ Intelisense en VSCode**
 
 ## Como Correr el TP
 
-El makefile es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
+El makefile es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas (no serviria la carpeta .vscode) y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
 
 ### Correr dentro de  VSCode
 
@@ -17,11 +17,11 @@ En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.jso
 - *Modulo Run con Helgrind*
 - *Modulo Test*
 
-Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea**
+Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea** y seleccionar lo que queremos hacer.
 
 Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`` para hacer todo mas rapido, como por ejemplo: 
 
-```json
+```c
 /* Atajos para TP - Operativos*/
 [
     {
@@ -54,14 +54,15 @@ Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`
 
 ### Debug en VSCode
 
-El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apretar **F5** se puede Debuggear
+El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apretar **F5** se puede Debuggear. **No olvidar los breakpoints**
 
+___
 
 ### Correr en Consola Externa
 
 Si en una terminal dentro de un modulo hacemos ``make help``, se imprime:
 
-```bash
+```
  make / make all -- Build project using debug flags.
  make project    -- Build project using release flags.
  make clean      -- Remove generated files from file system.
@@ -70,7 +71,7 @@ Si en una terminal dentro de un modulo hacemos ``make help``, se imprime:
  make test       -- Run Project Tests
  make run        -- Run Project
 ```
-Si no gusta el ``make run`` siempre se puede ``./bin/binario``
+Si no gusta el make siempre se puede hacer todo de manera manual. El binario se genera en ``bin/``
 
 
 
@@ -81,4 +82,3 @@ Si no gusta el ``make run`` siempre se puede ``./bin/binario``
 ```bash
 git checkout project/cfg project2/cfg 
 ```
-
