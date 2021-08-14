@@ -3,11 +3,20 @@
 - Instalar ultima version de [VSCode de 32bit](https://code.visualstudio.com/updates/v1_35) 
 - Instalar extension: **C/C++ Intelisense en VSCode**
 
+## Explicacion
+
+La carpeta utils es una **libreria compartida** estatica. La carpeta project es la base para hacer los modulos del tp, se puede clonar y crear los diferentes modulos. Lo unico que hay que cambiar a la hora de hacer los nuevos modulos es:
+
+- El nombre del directorio principal: ``project``
+- El nombre de las tareas en el archivo: ``tasks.json`` 
+
 ## Como Correr el TP
 
 El makefile es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas (no serviria la carpeta .vscode) y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
 
 ### Correr dentro de  VSCode
+
+- El repo se puede clonar desde **VSCode** o se puede clonar en una carpeta cualquiera y despues se abre el archivo ``tp-operativos.code-workspace`` desde **VSCode**
 
 En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.json``. Este archivo nos permite basicamente automatizar cualquier cosa. Para no usar la consola externa se crean 5 tareas por modulo:
 
