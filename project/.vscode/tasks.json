@@ -40,7 +40,7 @@
         {
             "label": "Project Run",
             "type": "shell",
-            "command": "make clean && make all && ./bin/${workspaceFolderBasename}",
+            "command": "make clean && make all && make run",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -59,14 +59,6 @@
             "label": "Project Build",
             "type": "shell",
             "command": "make clean && make all",
-            "problemMatcher": [
-                "$gcc"
-            ]
-        },
-        {
-            "label": "Project Test",
-            "type": "shell",
-            "command": "make all && ./bin/project test",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -74,7 +66,24 @@
                 "panel": "shared",
                 "showReuseMessage": true,
                 "clear": true,
-                "group": "test"
+                "group": "build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Project Test",
+            "type": "shell",
+            "command": "make all && make test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true,
+                "group": "tp"
             },
             "problemMatcher": [
                 "$gcc"

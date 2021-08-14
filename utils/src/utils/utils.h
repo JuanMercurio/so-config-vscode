@@ -1,13 +1,10 @@
-#ifndef SHARED_HELLO_H_
-#define SHARED_HELLO_H_
+#ifndef _UTILS_
+#define _UTILS_
 
 /* General */
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
-#include <sys/socket.h>
 #include <string.h>
-#include <readline/readline.h>
 #include <unistd.h>
 
 /* Commons */

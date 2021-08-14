@@ -13,6 +13,10 @@
     "C_Cpp.intelliSenseEngine": "Default",
     "C_Cpp.default.enableConfigurationSquiggles": true,
     "C_Cpp.default.intelliSenseMode": "gcc-x86",
-    "C_Cpp.intelliSenseEngineFallback": "Enabled"
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "files.associations": {
+      "conexiones.h": "c",
+      "utils.h": "c"
+    }
   }
 }

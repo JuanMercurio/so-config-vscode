@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "tests/tests.h"
 
-#include "../../utils/src/utils/utils.h"   //preguntar si esta bien incluida la shared
+#include "utils/utils.h" 
+#include "conexiones/conexiones.h"
 
 #endif
