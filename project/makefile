@@ -8,7 +8,7 @@ LIBRARY_PATHS=../utils
 # Project name
 PROJECT=$(shell basename $(shell cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd))
 
-# Files to detele with make clean:
+# Config files to detele with make clean:
 CFG = *.log *.config
 
 # Main subirectories
