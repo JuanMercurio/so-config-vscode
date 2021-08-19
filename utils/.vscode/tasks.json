@@ -12,5 +12,23 @@
             ],
             "group": "build"
         },
+        {
+            "label": "Build All",
+            "type": "shell",
+            "command": "cd .. && make all",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Clean All",
+            "type": "shell",
+            "command": "cd .. && make clean",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        }
     ]
 }
