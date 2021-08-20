@@ -12,7 +12,7 @@ La carpeta utils es una **libreria compartida** estatica. La carpeta project es 
 
 ## Como Correr el TP
 
-El makefile es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas (no serviria la carpeta .vscode) y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
+El makefile de los projectos es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas (no serviria la carpeta .vscode) y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
 
 ### Correr dentro de  VSCode
 
@@ -20,11 +20,11 @@ El makefile es el de [so-project-template](https://github.com/RaniAgus/so-projec
 
 En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.json``. Este archivo nos permite basicamente automatizar cualquier cosa. Para no usar la consola externa se crean 5 tareas por modulo:
 
-- *Modulo Build*
-- *Modulo Run*
-- *Modulo Run con Valgrind*
-- *Modulo Run con Helgrind*
-- *Modulo Test*
+- *Build Mobulo*
+- *Run Modulo*
+- *Valgrind Modulo*
+- *Helgrind Modulo*
+- *Test MOdulo*
 
 Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea** y seleccionar lo que queremos hacer.
 
@@ -61,6 +61,8 @@ Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`
 ]
 ```
 
+Parecen horribles las keybinds de ese archivo. [Aca](https://github.com/JuanMercurio/so-config-vscode/wiki/Keybinds-de-VSCode) se explica porque se eligieron esas.
+
 ### Debug en VSCode
 
 El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apretar **F5** se puede Debuggear. **No olvidar los breakpoints**
@@ -68,6 +70,13 @@ El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apre
 ___
 
 ### Correr en Consola Externa
+
+Si hacemos ``make help`` en la carpeta base del repo nos imprime esto:
+
+``` 
+ make / make all -- Compiles all projects in current directory
+ make clean      -- Cleans all projects in current directory
+```
 
 Si en una terminal dentro de un modulo hacemos ``make help``, se imprime:
 
