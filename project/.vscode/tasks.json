@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Project Run con Valgrind",
+            "label": "Valgrind Project",
             "type": "shell",
             "presentation": {
                 "echo": true,
@@ -21,7 +21,7 @@
             ]
         },
         {
-            "label": "Project Run con Helgrind",
+            "label": "Helgrind Project",
             "type": "shell",
             "presentation": {
                 "echo": true,
@@ -38,7 +38,7 @@
             ]
         },
         {
-            "label": "Project Run",
+            "label": "Run Project",
             "type": "shell",
             "command": "make clean && make all && make run",
             "presentation": {
@@ -56,7 +56,7 @@
             },
         },
         {
-            "label": "Project Build",
+            "label": "Build Project",
             "type": "shell",
             "command": "make clean && make all",
             "presentation": {
@@ -73,7 +73,7 @@
             ]
         },
         {
-            "label": "Project Test",
+            "label": "Test Project",
             "type": "shell",
             "command": "make all && make test",
             "presentation": {
