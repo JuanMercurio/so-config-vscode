@@ -24,7 +24,7 @@ En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.jso
 - *Run Modulo*
 - *Valgrind Modulo*
 - *Helgrind Modulo*
-- *Test MOdulo*
+- *Test Modulo*
 
 Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea** y seleccionar lo que queremos hacer.
 
