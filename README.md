@@ -36,27 +36,27 @@ Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`
     {
         "key": "alt+shift+r alt+shift+p",  // ALT+SHIT+R+P "Run Project"
         "command": "workbench.action.tasks.runTask",
-        "args": "Project Run"              // hace referencia a la tarea a ejecutar
+        "args": "Run Project"              // hace referencia a la tarea a ejecutar
     },
     {
         "key": "alt+shift+v alt+shift+p",  // ATL+SHIFT+V+P "Valgrind Project"
         "command": "workbench.action.tasks.runTask",
-        "args": "Project Valgrind"
+        "args": "Valgrind Project"
     },   
     {
         "key": "alt+shift+b alt+shift+p",
         "command": "workbench.action.tasks.runTask",
-        "args": "Project Build"
+        "args": "Build Project"
     }, 
     {
         "key": "alt+shift+t alt+shift+p",
         "command": "workbench.action.tasks.runTask",
-        "args": "Project Test"
+        "args": "Test Project"
     },
     {
         "key": "alt+shift+b alt+shift+u",
         "command": "workbench.action.tasks.runTask",
-        "args": "Utils Build"
+        "args": "Build Utils"
     },     
 ]
 ```
