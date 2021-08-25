@@ -1,8 +1,7 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
+        
         {
             "label": "Build Utils",
             "type": "shell",
@@ -12,19 +11,30 @@
             ],
             "group": "build"
         },
+        
         {
-            "label": "Build All",
-            "type": "shell",
-            "command": "cd .. && make all",
-            "problemMatcher": {
-                "base": "$gcc",
-                "fileLocation" : ["absolute", "${WorkspaceFolder}/utils/src"]
-            },
+            /*
+            Lamentablemente no podemos tener workspace level tasks
+            porque no existen en la ultima version de VSCode 32-bit (1.35).
+            Entonces vamos a compilar todos los modulos desde aca usando 
+            las proximas dos tareas: Build All y Clean All.  
+            
+            Vamos a tener que crear tareas como Build Utils y agregarlas a 
+            dependsOn
+            */
+
+            "label": "Build All",  
             "group": {
                 "kind": "build",
-                "isDefault": true
-            }
+                "isDefault": true   // ctrl+shift+b
+            },
+            "dependsOn" : [ 
+                // Agregar aca las tasks de compilacion de los nuevos projectos
+                "Build Utils",
+                "Build Project"
+            ],
         },
+    
         {
             "label": "Clean All",
             "type": "shell",
@@ -34,6 +44,34 @@
             ],
             "group": "build"
         },
+        
+        {   // Usar esta tarea como base para los nuevos modulos
+            "label": "Build Utils",
+            "type": "shell",
+            "command" : "make all",
+            "options": {
+                "cwd": "${workspaceFolder:utils}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "base" : "$gcc",
+                "fileLocation" : ["relative", "${workspaceFolder:utils}"]
+            },
+        },
+
+        {
+            "label": "Build Project",
+            "type": "shell",
+            "command" : "make all",
+            "options": {
+                "cwd": "${workspaceFolder:project}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "base" : "$gcc",
+                "fileLocation" : ["relative", "${workspaceFolder:project}"]
+            },
+        }
        
     ]
 }

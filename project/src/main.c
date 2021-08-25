@@ -3,12 +3,15 @@
 
 int main(int argc, char* argv[]) {
    
-   correr_tests(argc, argv[1]);    //solo corre si "argv[1]" es "test" (si el argumento que le pasas al binario en "test")
+   //solo corre si corremos el binario asi: binario test
+   correr_tests(argc, argv[1]);    
    
    while(1){
       helloWorld();
       sleep(2);
    }
+
+   int saturno;
    
    return 0;
 }
