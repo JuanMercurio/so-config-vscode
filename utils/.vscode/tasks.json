@@ -1,77 +1,71 @@
 {
     "version": "2.0.0",
     "tasks": [
-        
-        {
-            "label": "Build Utils",
-            "type": "shell",
-            "command": "make clean && make all",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build"
-        },
-        
-        {
-            /*
-            Lamentablemente no podemos tener workspace level tasks
-            porque no existen en la ultima version de VSCode 32-bit (1.35).
-            Entonces vamos a compilar todos los modulos desde aca usando 
-            las proximas dos tareas: Build All y Clean All.  
-            
-            Vamos a tener que crear tareas como Build Utils y agregarlas a 
-            dependsOn
-            */
+         
+        /*
+        This file is optimized to run in VSCode V1.35 32-bit. In newer versions of VSCode
+        there are better ways to achive what this file does. Like workspace tasks.
 
-            "label": "Build All",  
+        Using VSCode version 1.35 (latest for 32-bit systems):
+            - Does not have workspace tasks available so we are using "Build All" in this file
+            - Does not have "dependsOrder", so we have to only use "dependsOn". 
+      
+        */
+        
+        {
+            "label": "Build All",
             "group": {
                 "kind": "build",
-                "isDefault": true   // ctrl+shift+b
+                "isDefault": true
             },
-            "dependsOn" : [ 
-                // Agregar aca las tasks de compilacion de los nuevos projectos
-                "Build Utils",
+            "dependsOn" :[
+                /* 
+                This tasks will run in parallel, if something breaks in compilation 
+                you need to change the way this works as mention above. Meanwhile this works 
+                */
+                "Build Utils",  
                 "Build Project"
-            ],
+            ]
         },
-    
         {
             "label": "Clean All",
             "type": "shell",
             "command": "cd .. && make clean",
+            "presentation": {
+                "reveal": "never",
+            },
             "problemMatcher": [
                 "$gcc"
             ],
             "group": "build"
         },
-        
-        {   // Usar esta tarea como base para los nuevos modulos
+
+        {   // Use this tasks as guide to create more modules
             "label": "Build Utils",
             "type": "shell",
-            "command" : "make all",
+            "command": "make all",
             "options": {
                 "cwd": "${workspaceFolder:utils}"
             },
-            "isBackground": true,
+            "group": "build",
             "problemMatcher": {
-                "base" : "$gcc",
-                "fileLocation" : ["relative", "${workspaceFolder:utils}"]
-            },
+                "base": "$gcc",
+                "fileLocation" : [ "relative", "${workspaceFolder:utils}"]
+            }
         },
 
         {
             "label": "Build Project",
             "type": "shell",
-            "command" : "make all",
+            "command": "make all",
             "options": {
                 "cwd": "${workspaceFolder:project}"
             },
-            "isBackground": true,
+            "group": "build",
             "problemMatcher": {
-                "base" : "$gcc",
-                "fileLocation" : ["relative", "${workspaceFolder:project}"]
-            },
+                "base": "$gcc",
+                "fileLocation" : [ "relative", "${workspaceFolder:project}"]
+            }
         }
-       
     ]
 }

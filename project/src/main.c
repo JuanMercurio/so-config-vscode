@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 int main(int argc, char* argv[]) {
    
    //solo corre si corremos el binario asi: binario test
@@ -10,8 +9,5 @@ int main(int argc, char* argv[]) {
       helloWorld();
       sleep(2);
    }
-
-   int saturno;
-   
    return 0;
 }

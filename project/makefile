@@ -56,7 +56,8 @@ helgrind: all
 	valgrind --tool=helgrind --log-file="$@_$(PROJECT).log" $(BINARY) $(ARGS)
 
 run: all
-	make all && $(BINARY)
+	make -s all
+	clear && $(BINARY)
 
 help:
 	@echo "COMMANDS:"
@@ -65,8 +66,8 @@ help:
 	@echo "    make clean      -- Remove generated files from file system."
 	@echo "    make memcheck   -- Run using valgrind memcheck tool. Output will be redirected to an external log file."
 	@echo "    make helgrind   -- Run using valgrind helgrind tool. Output will be redirected to an external log file."
-	@echo "    make test       -- Run Project Tests"
-	@echo "    make run        -- Run Project"
+	@echo "    make test       -- Run Tests"
+	@echo "    make run        -- Run clearing the terminal beforehand"
 	@echo "VARIABLES:"
 	@echo "    ARGS          -- Arguments to be passed to main() using valgrind tools (eg: 'make helgrind ARGS=\"arg1 arg2 arg3\"')."
 	@echo "    LIBRARIES     -- External libraries to be included and linked, separated by spaces (eg: 'pthread commons utils')."
