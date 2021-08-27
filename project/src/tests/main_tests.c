@@ -5,7 +5,7 @@ int run_tests(){
 
     CU_initialize_registry();
    
-    CU_pSuite tests = CU_add_suite("PROCESO3 Suite",NULL,NULL);
+    CU_pSuite tests = CU_add_suite("Suite",NULL,NULL);
     CU_add_test(tests,"Probar Suma", suma);
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
@@ -16,7 +16,7 @@ int run_tests(){
 }
 
 
-void correr_tests(int arg, char* argv){
+void tests(int arg, char* argv){
     if(arg > 1 && strcmp(argv, "test")==0){
         int a = run_tests();
         exit(a);

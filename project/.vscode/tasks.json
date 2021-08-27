@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Valgrind Project",
+            "label": "Valgrind project",
             "type": "shell",
             "presentation": {
                 "echo": true,
@@ -21,7 +21,7 @@
             ]
         },
         {
-            "label": "Helgrind Project",
+            "label": "Helgrind project",
             "type": "shell",
             "presentation": {
                 "echo": true,
@@ -38,9 +38,27 @@
             ]
         },
         {
-            "label": "Run Project",
+            "label": "Run project",
             "type": "shell",
             "command": "make all && make run",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true,
+                "group": "tp"
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": ["relative"]
+            },
+        },
+        {
+            "label": "Test project",
+            "type": "shell",
+            "command": "make all && make test",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -48,7 +66,7 @@
                 "panel": "shared",
                 "showReuseMessage": true,
                 "clear": true,
-                "group": "tp"
+                "group": "test"
             },
             "problemMatcher": {
                 "base": "$gcc",

@@ -1,5 +1,5 @@
-#ifndef _MAIN_1_
-#define _MAIN_1_
+#ifndef _MAIN_PROJECT_
+#define _MAIN_PROJECT_
 
 #include "tests/tests.h"
 

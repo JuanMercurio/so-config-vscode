@@ -1,71 +1,96 @@
+ /*
+    This file is optimized to run in VSCode v1.35 for 32-bit. In newer versions of VSCode
+    there are better ways to achive what this file does. Like workspace tasks.
+
+    Using VSCode version 1.35 (latest for 32-bit systems):
+        - "workspace tasks" are not available so we are using "Build All" in this directory
+        - "dependsOrder" is not available, so we have to only use "dependsOn".  
+        
+    The highlights of the problemMatcher linger because of isBackground = true
+    That is the reason we clean before we build. A good solution is yet to be implemented
+*/
+
 {
     "version": "2.0.0",
-    "tasks": [
-         
-        /*
-        This file is optimized to run in VSCode V1.35 32-bit. In newer versions of VSCode
-        there are better ways to achive what this file does. Like workspace tasks.
-
-        Using VSCode version 1.35 (latest for 32-bit systems):
-            - Does not have workspace tasks available so we are using "Build All" in this file
-            - Does not have "dependsOrder", so we have to only use "dependsOn". 
-      
-        */
-        
+    "tasks": [        
         {
             "label": "Build All",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn" :[
-                /* 
-                This tasks will run in parallel, if something breaks in compilation 
-                you need to change the way this works as mention above. Meanwhile this works 
-                */
-                "Build Utils",  
-                "Build Project"
+            "dependsOn" :[  
+                //REFERENCE FOR SED: dependencies:
+                "Build project",
+				
             ]
         },
         {
             "label": "Clean All",
             "type": "shell",
             "command": "cd .. && make clean",
-            "presentation": {
+            "presentation":{
+                "echo": true,
                 "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
             },
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": "build"
+            "group": "build",
         },
-
-        {   // Use this tasks as guide to create more modules
+        {   
             "label": "Build Utils",
             "type": "shell",
             "command": "make all",
             "options": {
                 "cwd": "${workspaceFolder:utils}"
-            },
+			},
+			"isBackground": true,
             "group": "build",
             "problemMatcher": {
                 "base": "$gcc",
                 "fileLocation" : [ "relative", "${workspaceFolder:utils}"]
-            }
-        },
-
-        {
-            "label": "Build Project",
-            "type": "shell",
-            "command": "make all",
-            "options": {
-                "cwd": "${workspaceFolder:project}"
             },
-            "group": "build",
-            "problemMatcher": {
-                "base": "$gcc",
-                "fileLocation" : [ "relative", "${workspaceFolder:project}"]
-            }
-        }
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "dependsOn": ["Clean All"],
+        },
+            // REFERENCE FOR SED - build_tasks:
+            //projectBuildTaskStart											
+		{ 																	
+			"label": "Build project", 										
+			"type": "shell", 												
+			"command": "make all", 											
+			"options": { 													
+				"cwd": "${workspaceFolder:project}" 	 					
+			}, 																
+			"isBackground" : true,											
+			"group": "build", 												
+			"problemMatcher": { 											
+				"base": "$gcc", 											
+				"fileLocation": ["relative", "${workspaceFolder:project}"] 
+			}, 																
+			"presentation": { 												
+				"echo": true, 												
+				"reveal": "never", 											
+				"focus": false, 											
+				"panel": "shared",											
+				"showReuseMessage": true,									
+				"clear": false 												
+			},																
+			"dependsOn": ["Build Utils", "Clean All"],									
+		},																	
+            //reBuildTaskEnd
+        
     ]
 }

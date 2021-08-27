@@ -1,11 +1,8 @@
 {
   "folders": [
-    {
-      "path": "utils"
-    },
-    {
-      "path": "project"
-    }
+    // REFERENCE FOR SED - workspace_folders:
+		{"path": "project"},
+    {"path": "utils"},
   ],
 
   /* aca irian las tasks globales del workspace pero no nos da la version para eso :( */

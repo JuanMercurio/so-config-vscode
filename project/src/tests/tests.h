@@ -1,6 +1,8 @@
+#ifndef _TESTS_PROJECT_
+#define _TESTS_PROJECT_
+
 #include "../main.h"
 #include <CUnit/Basic.h>
-
 
 /*
     @NAME: run_tests
@@ -15,6 +17,8 @@ int run_tests();
     @PARA: arg  - cantidad de paramentros que inserto el usuario
            argv - el primer parametros que inserto el usuario  
  */
-void correr_tests(int arg, char* argv);
+void tests(int arg, char* argv);
 
 void suma();
+
+#endif

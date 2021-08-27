@@ -1,102 +1,52 @@
-# Config Inicial
+# Config - SO
 
+## Crear Entorno
+
+- Lo primero que tenemos que hacer es crear los modulos/projectos que vamos a necesitar para el tp. Abrimos una terminal en la raiz del repo y hacemos para cada modulo:
+     
+	 ``$ make project name=nombre_modulo`` 
+
+
+
+
+- Una vez que esten creados todos los modulos necesarios, podemos eliminar el modulo `project/` asi:
+
+	``$ make delete name=project`` 
+
+
+
+
+ Hay que tener en cuenta que siempre que se quiera eliminar un modulo creado, debemos usar el comando ``make delete``. Si solo eliminamos la carpeta van a quedar rastros de este en algunos archivos del workspace.
+ 
+
+ ## Configurar VSCode
 - Instalar ultima version de [VSCode de 32bit](https://code.visualstudio.com/updates/v1_35) 
 - Instalar extension: **C/C++ Intelisense en VSCode**
+- Abrir  *.code-workspace:
 
-## Explicacion
-
-La carpeta utils es una **libreria compartida** estatica. La carpeta project es la base para hacer los modulos del tp, se puede clonar y crear los diferentes modulos. Lo unico que hay que cambiar a la hora de hacer los nuevos modulos es:
-
-- El nombre del directorio principal: ``project``
-- El nombre de las tareas en el archivo: ``tasks.json`` 
-
-## Como Correr el TP
-
-El makefile de los projectos es el de [so-project-template](https://github.com/RaniAgus/so-project-template) con unas pequeñas modificaciones. Asi que se puede importar a Eclipse sin problemas (no serviria la carpeta .vscode) y usar el [so_deploy](https://github.com/sisoputnfrba/so-deploy).
-
-### Correr dentro de  VSCode
-
-- El repo se puede clonar desde **VSCode** o se puede clonar en una carpeta cualquiera y despues se abre el archivo ``tp-operativos.code-workspace`` desde **VSCode**
-
-En cada modulo esta la carpeta ``.vscode`` y dentro tiene el archivo ``tasks.json``. Este archivo nos permite basicamente automatizar cualquier cosa. Para no usar la consola externa se crean 5 tareas por modulo:
-
-- *Build Mobulo*
-- *Run Modulo*
-- *Valgrind Modulo*
-- *Helgrind Modulo*
-- *Test Modulo*
-
-Para ejecutar cada una hay que ir a **Tareas -> Ejecutar Tarea** y seleccionar lo que queremos hacer.
-
-Lo mas conveniente es crear un par de Keybinds en el archivo ``keybindings.json`` para hacer todo mas rapido, como por ejemplo: 
-
-```c
-/* Atajos para TP - Operativos*/
-[
-    {
-        "key": "alt+shift+r alt+shift+p",  // ALT+SHIT+R+P "Run Project"
-        "command": "workbench.action.tasks.runTask",
-        "args": "Run Project"              // hace referencia a la tarea a ejecutar
-    },
-    {
-        "key": "alt+shift+v alt+shift+p",  // ATL+SHIFT+V+P "Valgrind Project"
-        "command": "workbench.action.tasks.runTask",
-        "args": "Valgrind Project"
-    },   
-    {
-        "key": "alt+shift+b alt+shift+p",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Build Project"
-    }, 
-    {
-        "key": "alt+shift+t alt+shift+p",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Test Project"
-    },
-    {
-        "key": "alt+shift+b alt+shift+u",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Build Utils"
-    },     
-]
-```
-
-Parecen horribles las keybinds de ese archivo. [Aca](https://github.com/JuanMercurio/so-config-vscode/wiki/Keybinds-de-VSCode) se explica porque se eligieron esas.
-
-### Debug en VSCode
-
-El archivo ``launch.json`` es el que nos deja debuggear en VSCode. Con solo apretar **F5** se puede Debuggear. **No olvidar los breakpoints**
-
-___
-
-### Correr en Consola Externa
-
-Si hacemos ``make help`` en la carpeta base del repo nos imprime esto:
-
-``` 
- make / make all -- Compiles all projects in current directory
- make clean      -- Cleans all projects in current directory
-```
-
-Si en una terminal dentro de un modulo hacemos ``make help``, se imprime:
-
-```
- make / make all -- Build project using debug flags.
- make project    -- Build project using release flags.
- make clean      -- Remove generated files from file system.
- make memcheck   -- Run using valgrind memcheck tool. Output will be redirected to an external log file.
- make helgrind   -- Run using valgrind helgrind tool. Output will be redirected to an external log file.
- make test       -- Run Project Tests
- make run        -- Run Project
-```
-Si no gusta el make siempre se puede hacer todo de manera manual. El binario se genera en ``bin/``
+![](https://media3.giphy.com/media/0l9YwIR1GHwfx8DGmx/giphy.gif)
 
 
 
-# Datos Importantes
+- Vamos a usar las tareas de **VSCode** para las acciones en de nuestros modulos como compilar, correr, etc:
 
-- Siempre hacer ``make clean`` antes de hacer un *commit/push*. Asi no hay archivos innecesarios en el repositorio *(ej: el .log de valgrind)*. 
-- No agregar al commit o hacer ``checkout`` de los archivos que no son necesarios actualizar y pueden crear conflictos absurdos. Ejemplo cuando hay cambios en el log y el config:
-```bash
-git checkout project/cfg project2/cfg 
-```
+![](https://media3.giphy.com/media/qq0aMclUdF76YVYGg5/giphy.gif?cid=790b76116d0b3bfda7b9f02f516db6e77a0bfd67352263ad&rid=giphy.gif&ct=g)
+
+-  Crear Keybinds para las tareas mas usadas
+
+:ok_hand: Ya esta todo para empezar a codear
+
+
+
+## Tests
+
+El entorno soporta **CUnit**. El ``makefile`` de cada projecto tiene una regla _**test**_ que corre el binario del projecto con el argumento "test": 
+
+``$ ./binario test ``
+
+Esta regla es la que usa la tarea: **Test Project**. Si no entendes porque se corren asi los tests invito a que leas [esto](https://drive.google.com/file/d/1S5uSmkmKw66erjuHb7tb4UmDdklk8YaC/view "esto"). Basicamente el **main** del proyecto tiene que chequear si recibio como primer parametro "test", de ser asi los corre en vez del programa principal.
+
+ :wrench: En la carpeta ``project/`` tenemos un ejemplo de como hay que configurar el **main** del proyecto para que corra los tests.
+
+
+

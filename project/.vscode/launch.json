@@ -8,7 +8,7 @@
             "name": "project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/project",
+            "program": "${workspaceFolder}/bin/${workspaceFolderBasename}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

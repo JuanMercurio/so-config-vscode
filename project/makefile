@@ -40,10 +40,13 @@ DEPENDENCIES=$(foreach LIBPATH,$(LIBRARY_PATHS),$(patsubst ./%,$(LIBPATH)/%,$(sh
 all: $(BINARY)
 
 test: all
-	make all && $(BINARY) test
+	$(BINARY) test
 
 clean:
 	rm -rf $(CFG) $(BINDIR) $(OBJDIR) 
+
+delete: 
+	@cd .. && make -s delete name=$(PROJECT)
 
 release: CFLAGS = -Wall -DNDEBUG
 release: clean
@@ -56,8 +59,8 @@ helgrind: all
 	valgrind --tool=helgrind --log-file="$@_$(PROJECT).log" $(BINARY) $(ARGS)
 
 run: all
-	make -s all
-	clear && $(BINARY)
+	clear
+	@$(BINARY)
 
 help:
 	@echo "COMMANDS:"
@@ -68,6 +71,7 @@ help:
 	@echo "    make helgrind   -- Run using valgrind helgrind tool. Output will be redirected to an external log file."
 	@echo "    make test       -- Run Tests"
 	@echo "    make run        -- Run clearing the terminal beforehand"
+	@echo "    make delete     -- Delete project and structures"
 	@echo "VARIABLES:"
 	@echo "    ARGS          -- Arguments to be passed to main() using valgrind tools (eg: 'make helgrind ARGS=\"arg1 arg2 arg3\"')."
 	@echo "    LIBRARIES     -- External libraries to be included and linked, separated by spaces (eg: 'pthread commons utils')."

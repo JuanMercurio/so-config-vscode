@@ -22,7 +22,6 @@
                 "path": [
                     "${workspaceFolder}",
                     "${workspaceFolder}/src",
-                    "../utils/src",
                     "/usr/include/c++/5",
                     "/usr/include/i386-linux-gnu/c++/5",
                     "/usr/include/c++/5/backward",
