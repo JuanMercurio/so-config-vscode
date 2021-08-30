@@ -52,7 +52,7 @@
             },
             "problemMatcher": {
                 "base": "$gcc",
-                "fileLocation": ["relative"]
+                "fileLocation": ["relative", "${workspaceFolder}"]
             },
         },
         {
@@ -73,5 +73,18 @@
                 "fileLocation": ["relative"]
             },
         },
+        {
+            "label": "Build project",
+            "type":"shell",
+            "command" : "make all",
+            "problemMatcher": {
+                "base" : "$gcc",
+                "fileLocation" : [ "relative", "${workspaceFolder}"]
+            },
+            "options": {
+                "cwd": "${worksapceFolder}"
+            }
+
+        }
     ]
 }

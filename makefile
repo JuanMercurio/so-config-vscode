@@ -69,7 +69,7 @@ project:
 	@sed -i '/$(SED_TASK)/a 													\
 				//$(name)BuildTaskStart											\
 			{ 																	\
-				"label": "Build $(name)", 										\
+				"label": "Build $(name) for build all", 										\
 				"type": "shell", 												\
 				"command": "make all", 											\
 				"options": { 													\

@@ -21,7 +21,7 @@
             },
             "dependsOn" :[  
                 //REFERENCE FOR SED: dependencies:
-                "Build project",
+                "Build project for build all",
 				
             ]
         },
@@ -43,7 +43,7 @@
             "group": "build",
         },
         {   
-            "label": "Build Utils",
+            "label": "Build Utils for build all",
             "type": "shell",
             "command": "make all",
             "options": {
@@ -68,7 +68,7 @@
             // REFERENCE FOR SED - build_tasks:
             //projectBuildTaskStart											
 		{ 																	
-			"label": "Build project", 										
+			"label": "Build project for build all", 										
 			"type": "shell", 												
 			"command": "make all", 											
 			"options": { 													
@@ -88,9 +88,23 @@
 				"showReuseMessage": true,									
 				"clear": false 												
 			},																
-			"dependsOn": ["Build Utils", "Clean All"],									
+			"dependsOn": ["Build Utils for build all", "Clean All"],									
 		},																	
-            //reBuildTaskEnd
+            //projectBuildTaskEnd
+
+        {
+            "label": "Build Utils",
+            "type": "shell",
+            "command" : "make all",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation" : [ "relative", "${workspaceFolder}"]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+
+        }
         
     ]
 }
