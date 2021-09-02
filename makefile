@@ -65,7 +65,7 @@ project:
 
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
-	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name)"},' $(WORKSPACE).code-workspace
+	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name) for build all"},' $(WORKSPACE).code-workspace
 	@sed -i '/$(SED_TASK)/a 													\
 				//$(name)BuildTaskStart											\
 			{ 																	\
