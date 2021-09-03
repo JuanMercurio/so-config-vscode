@@ -2,14 +2,14 @@
 
 ## Crear Entorno
 
-- Lo primero que tenemos que hacer es crear los modulos/projectos que vamos a necesitar para el tp. Abrimos una terminal en la raiz del repo y hacemos para cada modulo:
+- Lo primero que tenemos que hacer es **crear los modulos/projectos** que vamos a necesitar para el tp. Abrimos una terminal en la raiz del repo y hacemos para cada modulo:
      
 	 ``$ make project name=nombre_modulo`` 
 
 
 
 
-- Una vez que esten creados todos los modulos necesarios, podemos eliminar el modulo `project/` asi:
+- Una vez que esten creados todos los modulos necesarios, podemos **eliminar el modulo** `project/` asi:
 
 	``$ make delete name=project`` 
 
@@ -32,7 +32,7 @@
 
 ![](https://media3.giphy.com/media/qq0aMclUdF76YVYGg5/giphy.gif?cid=790b76116d0b3bfda7b9f02f516db6e77a0bfd67352263ad&rid=giphy.gif&ct=g)
 
--  Crear Keybinds para las tareas mas usadas
+-  Crear **Keybinds** para las tareas mas usadas
 
 :ok_hand: Ya esta todo para empezar a codear
 
