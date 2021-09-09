@@ -51,7 +51,7 @@ all:
 
 #p: project
 project:
-	@mkdir $(name) $(name)/$(SRC)  $(name)/$(CONFIG)  $(name)/$(TESTS)
+	@mkdir $(name) $(name)/$(SRC) $(name)/$(CONFIG)  $(name)/$(TESTS)
 	
 	@touch $(name)/$(CONFIG)/$(name).config  	\
 	       $(name)/$(CONFIG)/$(name).log		\
@@ -65,11 +65,11 @@ project:
 
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
-	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name) for build all"},' $(WORKSPACE).code-workspace
+	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name)"},' $(WORKSPACE).code-workspace
 	@sed -i '/$(SED_TASK)/a 													\
 				//$(name)BuildTaskStart											\
 			{ 																	\
-				"label": "Build $(name) for build all", 										\
+				"label": "Build $(name) for build all", 						\
 				"type": "shell", 												\
 				"command": "make all", 											\
 				"options": { 													\
@@ -89,10 +89,10 @@ project:
 					"showReuseMessage": true,									\
 					"clear": false 												\
 				},																\
-				"dependsOn": ["Build Utils", "Clean All"],						\
-			},																	\																	\
+				"dependsOn": ["Build Utils for build all"],						\
+			},																	\
 				//$(name)BuildTaskEnd' $(UTILS_TASKS)
-	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name)",' $(UTILS_TASKS)
+	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name) for build all",' $(UTILS_TASKS)
 	
 	@echo "$(name) was added"
 
@@ -100,7 +100,7 @@ del: delete
 delete: $(BASE_PROJECT)
 	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
 	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
-	@sed -i '/"Build $(name)"/d' $(UTILS_TASKS)
+	@sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
 
 	@rm -fr $(name)
 

@@ -88,7 +88,7 @@
 				"showReuseMessage": true,									
 				"clear": false 												
 			},																
-			"dependsOn": ["Build Utils for build all", "Clean All"],									
+			"dependsOn": ["Build Utils for build all"],									
 		},																	
             //projectBuildTaskEnd
 
