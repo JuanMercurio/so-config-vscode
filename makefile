@@ -1,3 +1,5 @@
+SHELL = bash
+ 
 # Custom shared libraries
 SHARED_LIBS = utils
 
@@ -92,8 +94,6 @@ project:
 				//$(name)BuildTaskEnd' $(UTILS_TASKS)
 	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name) for build all",' $(UTILS_TASKS)
 	
-	@echo "$(name) was added"
-
 del: delete
 delete: $(BASE_PROJECT)
 	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
@@ -112,14 +112,15 @@ clean:
 	echo "Make $@ was succesfull"
 
 create:
-	while ["$$modulo" == "\n"] ; \
-	 do \
-		echo "Insertar Nombre de Modulo";\
-		read modulo; \
-		if [ "$$modulo" == "saturno" ]; then \
-			break; \
-		fi; \
-	done;
+	@echo 
+	@echo " Crear entorno para TP "
+	@echo 
+	@echo " - Ingresar nombre de modulo, confirmar con ENTER"
+	@echo " - Repetir con todos los modulos" 
+	@echo " - Para finalizar pulse ENTER dos veces "
+	@echo 
+	@while read word; do if [ -z $$word ]; then break;  fi; make project -s name=$$word; done
+	@rm -fr project
 
 help:
 	@echo ""

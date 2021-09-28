@@ -19,7 +19,7 @@
                 "kind": "build",
                 "isDefault": true
             }, 
-			"dependsOn": ["Build utils for build all"], // tasks_chain
+	 	"dependsOn": ["Build utils for build all"], // tasks_chain
         },
 
         {   
@@ -62,7 +62,7 @@
             ],
         }, 
 
-            // REFERENCE FOR SED - build_tasks:
+			// REFERENCE FOR SED - build_tasks:
 
     ]
 }
