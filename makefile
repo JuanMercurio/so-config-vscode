@@ -126,6 +126,7 @@ create:
 	@while read word; do if [ -z $$word ]; then break;  fi; make project -s name=$$word; done
 	@rm -fr project
 	@rm README.md
+	@rm -fr .git
 	@sed -i '/{"path": "project"},/d' $(WORKSPACE).code-workspace
 
 
