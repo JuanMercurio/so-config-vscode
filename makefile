@@ -1,3 +1,4 @@
+# Uses bash instead of sh 
 SHELL = bash
  
 # Custom shared libraries
@@ -94,11 +95,11 @@ project:
 				//$(name)BuildTaskEnd' $(UTILS_TASKS)
 	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name) for build all",' $(UTILS_TASKS)
 	
-del: delete
-delete: $(BASE_PROJECT)
-	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
-	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
-	# @sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
+#del: delete
+#delete: $(BASE_PROJECT)
+#	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
+#	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
+#	@sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
 
 	@rm -fr $(name)
 
@@ -112,13 +113,16 @@ clean:
 	echo "Make $@ was succesfull"
 
 create:
+	@clear
 	@echo 
 	@echo " Crear entorno para TP "
 	@echo 
 	@echo " - Ingresar nombre de modulo, confirmar con ENTER"
+	@echo "   - Recorda que la biblioteca compartida ya esta implimentada"
 	@echo " - Repetir con todos los modulos" 
 	@echo " - Para finalizar pulse ENTER dos veces "
 	@echo 
+	@echo "Modulos:"
 	@while read word; do if [ -z $$word ]; then break;  fi; make project -s name=$$word; done
 	@rm -fr project
 	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
