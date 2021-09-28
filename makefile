@@ -121,22 +121,21 @@ create:
 	@echo 
 	@while read word; do if [ -z $$word ]; then break;  fi; make project -s name=$$word; done
 	@rm -fr project
+	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
 
 help:
 	@echo ""
-	@echo "$(BOLDBLUE)COMMANDS: " 
-	@echo "     $(BOLDGREEN)make$(NC) / $(BOLDGREEN)make all$(NC)    -- Compiles all projects in current directory"
-	@echo "     $(BOLDGREEN)make clean$(NC)         -- Cleans all projects in current directory"
-	@echo "   "                        	
-	@echo "     $(BOLDGREEN)make project$(NC)       -- Creates a new project with specified name"
-	@echo "                           $(BOLDYELLOW)NEEDS ARGUMENT$(NC) - $(MAGENTA)$"name$"$(NC):"
-	@echo "                           - Example: $(LIGHTCYAN)make project name=Client$(NC)"
-	@echo "  "                         
-	@echo "     $(BOLDGREEN)make delete$(NC) /     -- Deletes specified project and all its"
-	@echo "     $(BOLDGREEN)make del$(NC)             non necesary estructures in our workspace"
-	@echo "                          $(BOLDYELLOW)NEEDS ARGUMENT$(NC) - $(MAGENTA)$"name$"$(NC):"	
-	@echo "                           - Example: $(LIGHTCYAN)make delete name=project$(NC)"
-	@echo " "
+	@echo -e "$(BOLDBLUE)COMMANDS: " 
+	@echo -e "     $(BOLDGREEN)make$(NC) / $(BOLDGREEN)make all$(NC)    -- Compiles all projects in current directory"
+	@echo -e "     $(BOLDGREEN)make clean$(NC)         -- Cleans all projects in current directory"
+	@echo -e " 		  "                        	
+	@echo -e "     $(BOLDGREEN)make create$(NC)        -- Given user input it creates a coding enviroment "
+	@echo -e " 		  "                        	
+	@echo -e "     $(BOLDGREEN)make project$(NC)       -- Creates a new project with specified name"
+	@echo -e "                           $(BOLDYELLOW)NEEDS ARGUMENT$(NC) - $(MAGENTA)$"name$"$(NC):"
+	@echo -e "                           - Example: $(LIGHTCYAN)make project name=Client$(NC)"
+	@echo -e " "                         
+	@echo -e " "
 
 
 .PHONY: project clean all delete del p create
