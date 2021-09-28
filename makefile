@@ -12,11 +12,6 @@ MODULES = $(filter-out $(SHARED_LIBS), $(DIRECTORIES))
 # A base project use to create new projects with make project
 BASE_PROJECT =$(strip $(word 1, $(MODULES)))
 
-print:
-	@echo $(DIRECTORIES)
-	@echo $(MODULES)
-	@echo $(BASE_PROJECT)
-
 # Name of workspace file
 WORKSPACE = $(word 1,$(shell find . -maxdepth 1 -name *.code-workspace | tr './' ' '))
 
@@ -37,6 +32,7 @@ DEBUG = .vscode/launch.json
 SED_WORKSPACE_DIRS = workspace_folders:
 SED_DEPENDANCIES = dependencies:
 SED_TASK =build_tasks:
+SED_TASKS_CHAIN = tasks_chain
 
 # ===============================================================================================================
 
@@ -66,6 +62,8 @@ project:
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
 	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name)"},' $(WORKSPACE).code-workspace
+	@sed -i '/$(SED_TASKS_CHAIN)/a \\t 	"dependsOn": ["Build $(name) for build all"], ' $(UTILS_TASKS)
+	@sed -i '/$(SED_TASKS_CHAIN)/d' $(UTILS_TASKS) 
 	@sed -i '/$(SED_TASK)/a 													\
 				//$(name)BuildTaskStart											\
 			{ 																	\
@@ -88,8 +86,8 @@ project:
 					"panel": "shared",											\
 					"showReuseMessage": true,									\
 					"clear": false 												\
-				},																\
-				"dependsOn": ["Build Utils for build all"],						\
+				},\
+				"dependsOn": ["Build Utils for build all"],			// $(SED_TASKS_CHAIN)			\
 			},																	\
 				//$(name)BuildTaskEnd' $(UTILS_TASKS)
 	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name) for build all",' $(UTILS_TASKS)
@@ -100,11 +98,9 @@ del: delete
 delete: $(BASE_PROJECT)
 	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
 	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
-	@sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
+	# @sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
 
 	@rm -fr $(name)
-
-	@echo "$(name) was removed"
 
 clean: 
 	@for dir in $(DIRECTORIES); 	\
@@ -114,6 +110,16 @@ clean:
 		cd ..; 						\
 	done; 							\
 	echo "Make $@ was succesfull"
+
+create:
+	while ["$$modulo" == "\n"] ; \
+	 do \
+		echo "Insertar Nombre de Modulo";\
+		read modulo; \
+		if [ "$$modulo" == "saturno" ]; then \
+			break; \
+		fi; \
+	done;
 
 help:
 	@echo ""
@@ -132,7 +138,7 @@ help:
 	@echo " "
 
 
-.PHONY: project clean all delete del p
+.PHONY: project clean all delete del p create
 
 # ===============================================================================================================
 

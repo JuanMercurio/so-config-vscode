@@ -18,13 +18,33 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "dependsOn" :[  
-                //REFERENCE FOR SED: dependencies:
-                "Build project for build all",
-				
-            ]
+            }, 
+			"dependsOn": ["Build utils for build all"], // tasks_chain
         },
+
+        {   
+            "label": "Build Utils for build all",
+            "type": "shell",
+            "command": "make all",
+            "options": {
+                "cwd": "${workspaceFolder:utils}"
+			},
+			"isBackground": true,
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation" : [ "relative", "${workspaceFolder:utils}"]
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "dependsOn": ["Clean All"],
+        },
+        
         {
             "label": "Clean All",
             "type": "shell",
@@ -40,71 +60,9 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": "build",
-        },
-        {   
-            "label": "Build Utils for build all",
-            "type": "shell",
-            "command": "make all",
-            "options": {
-                "cwd": "${workspaceFolder:utils}"
-			},
-			"isBackground": true,
-            "group": "build",
-            "problemMatcher": {
-                "base": "$gcc",
-                "fileLocation" : [ "relative", "${workspaceFolder:utils}"]
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "never",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "dependsOn": ["Clean All"],
-        },
+        }, 
+
             // REFERENCE FOR SED - build_tasks:
-            //projectBuildTaskStart											
-		{ 																	
-			"label": "Build project for build all", 										
-			"type": "shell", 												
-			"command": "make all", 											
-			"options": { 													
-				"cwd": "${workspaceFolder:project}" 	 					
-			}, 																
-			"isBackground" : true,											
-			"group": "build", 												
-			"problemMatcher": { 											
-				"base": "$gcc", 											
-				"fileLocation": ["relative", "${workspaceFolder:project}"] 
-			}, 																
-			"presentation": { 												
-				"echo": true, 												
-				"reveal": "never", 											
-				"focus": false, 											
-				"panel": "shared",											
-				"showReuseMessage": true,									
-				"clear": false 												
-			},																
-			"dependsOn": ["Build Utils for build all"],									
-		},																	
-            //projectBuildTaskEnd
 
-        {
-            "label": "Build Utils",
-            "type": "shell",
-            "command" : "make all",
-            "problemMatcher": {
-                "base": "$gcc",
-                "fileLocation" : [ "relative", "${workspaceFolder}"]
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-
-        }
-        
     ]
 }
