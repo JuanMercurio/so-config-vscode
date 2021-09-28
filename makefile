@@ -50,17 +50,19 @@ all:
 
 #p: project
 project:
-	@mkdir $(name) $(name)/$(SRC) $(name)/$(CONFIG)  $(name)/$(TESTS)
+	@mkdir $(name) $(name)/$(SRC) $(name)/$(CONFIG) 
 	
 	@touch $(name)/$(CONFIG)/$(name).config  	\
 	       $(name)/$(CONFIG)/$(name).log		\
-		   $(name)/$(SRC)/main.c 				\
-		   $(name)/$(SRC)/main.h 				\
-		   $(name)/$(TESTS)/tests.c 			\
-		   $(name)/$(TESTS)/tests.h
+		   $(name)/$(SRC)/main.c 				
 
 	@cp -R $(BASE_PROJECT)/.vscode $(name)
 	@cp -r $(BASE_PROJECT)/makefile $(name)/makefile
+
+	@echo "" >> $(name)/$(SRC)/main.c  
+	@echo "int main(int arg, char* argv[]){ " >> $(name)/$(SRC)/main.c
+	@echo "    return 0;" >> $(name)/$(SRC)/main.c 
+	@echo "}" >> $(name)/$(SRC)/main.c
 
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
 	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
