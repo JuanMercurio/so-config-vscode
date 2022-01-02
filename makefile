@@ -2,7 +2,7 @@
 SHELL = bash
  
 # Custom shared libraries
-SHARED_LIBS = utils
+SHARED_LIBS = shared
 
 # ===============================================================================================================
 
@@ -27,7 +27,7 @@ CONFIG=cfg
 .VSCODE=.vscode
 
 # Tasks and Debugg
-UTILS_TASKS = utils/.vscode/tasks.json
+UTILS_TASKS = shared/.vscode/tasks.json
 TASKS = .vscode/tasks.json
 DEBUG = .vscode/launch.json 
 
@@ -40,70 +40,17 @@ SED_TASKS_CHAIN = tasks_chain
 # ===============================================================================================================
 
 all:
-	@for dir in $(DIRECTORIES);		\
+	@for lib in $(SHARED_LIBS);		\
+	do 								\
+		make --no-print-directory -C $$lib $@;			\
+	done; 							
+	@for dir in $(MODULES);			\
 	do 								\
 		cd $$dir; 					\
-		make -s $@; 				\
+		make  $@; 				\
 		cd ..; 						\
 	done; 							\
 	echo "Make $@ was succesfull"
-
-#p: project
-project:
-	@mkdir $(name) $(name)/$(SRC) $(name)/$(CONFIG) 
-	
-	@touch $(name)/$(CONFIG)/$(name).config  	\
-	       $(name)/$(CONFIG)/$(name).log		\
-		   $(name)/$(SRC)/main.c 				
-
-	@cp -R $(BASE_PROJECT)/.vscode $(name)
-	@cp -r $(BASE_PROJECT)/makefile $(name)/makefile
-
-	@echo "" >> $(name)/$(SRC)/main.c  
-	@echo "int main(int arg, char* argv[]){ " >> $(name)/$(SRC)/main.c
-	@echo "    return 0;" >> $(name)/$(SRC)/main.c 
-	@echo "}" >> $(name)/$(SRC)/main.c
-
-	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
-	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
-	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name)"},' $(WORKSPACE).code-workspace
-	@sed -i '/$(SED_TASKS_CHAIN)/a \\t 	"dependsOn": ["Build $(name) for build all"], ' $(UTILS_TASKS)
-	@sed -i '/$(SED_TASKS_CHAIN)/d' $(UTILS_TASKS) 
-	@sed -i '/$(SED_TASK)/a 													\
-				//$(name)BuildTaskStart											\
-			{ 																	\
-				"label": "Build $(name) for build all", 						\
-				"type": "shell", 												\
-				"command": "make all", 											\
-				"options": { 													\
-					"cwd": "$${workspaceFolder:$(name)}" 	 					\
-				}, 																\
-				"isBackground" : true,											\
-				"group": "build", 												\
-				"problemMatcher": { 											\
-					"base": "$$gcc", 											\
-					"fileLocation": ["relative", "$${workspaceFolder:$(name)}"] \
-				}, 																\
-				"presentation": { 												\
-					"echo": true, 												\
-					"reveal": "never", 											\
-					"focus": false, 											\
-					"panel": "shared",											\
-					"showReuseMessage": true,									\
-					"clear": false 												\
-				},\
-				"dependsOn": ["Build Utils for build all"],			// $(SED_TASKS_CHAIN)			\
-			},																	\
-				//$(name)BuildTaskEnd' $(UTILS_TASKS)
-	@sed -i '/$(SED_DEPENDANCIES)/a \\t			"Build $(name) for build all",' $(UTILS_TASKS)
-	
-del: delete
-delete: $(BASE_PROJECT)
-	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
-	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
-	@sed -i '/"Build $(name) for build all"/d' $(UTILS_TASKS)
-
-	@rm -fr $(name)
 
 clean: 
 	@for dir in $(DIRECTORIES); 	\
@@ -113,6 +60,39 @@ clean:
 		cd ..; 						\
 	done; 							\
 	echo "Make $@ was succesfull"
+
+p: project
+project:
+	@mkdir $(name) $(name)/$(SRC) $(name)/$(CONFIG) 
+
+	@touch $(name)/$(CONFIG)/$(name).config  	\
+	$(name)/$(CONFIG)/$(name).log		\
+	$(name)/$(SRC)/main.c 				
+
+	@cp -R $(BASE_PROJECT)/.vscode $(name)
+	@cp -r $(BASE_PROJECT)/makefile $(name)/makefile
+
+	@echo "/*  This is an example  */" >> $(name)/$(SRC)/main.c  
+	@echo "" >> $(name)/$(SRC)/main.c  
+	@echo "int main(int arg, char* argv[]){ " >> $(name)/$(SRC)/main.c
+	@echo "    return 0;" >> $(name)/$(SRC)/main.c 
+	@echo "}" >> $(name)/$(SRC)/main.c
+
+	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(TASKS)	
+	@sed -i 's/$(BASE_PROJECT)/$(name)/g' $(name)/$(DEBUG)
+	@sed -i '/$(SED_WORKSPACE_DIRS)/a \\t	{"path": "$(name)"},' $(WORKSPACE).code-workspace
+
+del: delete
+
+delete: $(BASE_PROJECT)
+	@sed -i '/$(name)BuildTaskStart/,/$(name)BuildTaskEnd/d' $(UTILS_TASKS)
+	@sed -i '/{"path": "$(name)"},/d' $(WORKSPACE).code-workspace
+
+	@rm -fr $(name)
+
+	@echo "$(name) was removed"
+
+
 
 create:
 	@clear
@@ -131,6 +111,11 @@ create:
 	@rm -fr .git
 	@sed -i '/{"path": "project"},/d' $(WORKSPACE).code-workspace
 
+print:
+	@echo Directories:  $(DIRECTORIES)
+	@echo Modules:      $(MODULES)
+	@echo Base Project: $(BASE_PROJECT)
+	@echo Custom Libraries: $(SHARED_LIBS)
 
 help:
 	@echo ""

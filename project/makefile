@@ -1,7 +1,7 @@
 # Include libraries here
-LIBRARIES=utils pthread readline cunit
+LIBRARIES=shared pthread readline cunit
 # Include custom library paths here
-LIBRARY_PATHS=../utils
+LIBRARY_PATHS=../shared
 
 # ==============================================================================================================
 

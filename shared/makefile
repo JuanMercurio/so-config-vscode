@@ -1,6 +1,9 @@
 # Include custom library paths here
 LIBRARY_PATHS=
 
+# Incliude libraries needed by this module
+LIBRARIES=
+
 # ==============================================================================================================
 
 # Project name
@@ -22,13 +25,16 @@ SOURCES=$(filter ./$(SRCDIR)/%,$(shell find . -iname "*.c" | tr '\n' ' '))
 INCLUDES=$(foreach LIBPATH,$(LIBRARY_PATHS),-I$(LIBPATH)/$(shell make --no-print-directory -C $(LIBPATH) idir))
 
 # Objects
-BINARY=$(BINDIR)/lib$(PROJECT).a
+BINARY=$(BINDIR)/lib$(PROJECT).so
 OBJECTS=$(SOURCES:./$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 # Dependencies
 DEPENDENCIES=$(foreach LIBPATH,$(LIBRARY_PATHS),$(patsubst ./%,$(LIBPATH)/%,$(shell make --no-print-directory -C $(LIBPATH) sources)))
 
+# Libraries
+LIBS=$(LIBRARIES:%=-l%)
 # ==============================================================================================================
+
 
 all: $(BINARY)
 
@@ -50,9 +56,19 @@ help:
 
 # ==============================================================================================================
 
-# Build project
+# Build static library
 $(BINARY): $(DIRECTORIES) $(OBJECTS)
 	ar rcs -o "$@" $(OBJECTS)
+
+# Build and install Dinamic Library
+install: $(DIRECTORIES) $(OBJECTS) $(LIBS)
+	$(CC) -shared -o $(BINARY) $(OBJECTS) $(LIBS) 
+	sudo cp -u $(BINARY) /usr/lib/
+
+# Uninstall dinamic library from system
+uninstall: 
+	make clean all
+	sudo rm /usr/lib/lib$(PROJECT).so
 
 # Create directories for objects
 $(DIRECTORIES):
@@ -60,10 +76,10 @@ $(DIRECTORIES):
 
 # Build objects
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h $(DEPENDENCIES)
-	$(CC) $(INCLUDES) $(CFLAGS) -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(CC) $(INCLUDES) $(CFLAGS) -fPIC -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPENDENCIES)
-	$(CC) $(INCLUDES) $(CFLAGS) -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(CC) $(INCLUDES) $(CFLAGS) -fPIC -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 
 # ==============================================================================================================
 

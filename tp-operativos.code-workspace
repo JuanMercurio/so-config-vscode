@@ -2,7 +2,7 @@
   "folders": [
     // REFERENCE FOR SED - workspace_folders:
     {"path": "project"},
-    {"path": "utils"},
+    {"path": "shared"},
   ],
 
   /* aca irian las tasks globales del workspace pero no nos da la version para eso :( */
