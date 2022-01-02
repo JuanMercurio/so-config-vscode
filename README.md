@@ -1,23 +1,9 @@
 # Config - SO
 
-## Crear Entorno
+### Demo
 
-- Lo primero que tenemos que hacer es **crear los modulos/projectos** que vamos a necesitar para el tp. Abrimos una terminal en la raiz del repo y hacemos para cada modulo:
-     
-	 ``$ make project name=nombre_modulo`` 
+![](https://media4.giphy.com/media/84XAqTELHbZyGDQ3Yf/giphy.gif)
 
-
-
-
-- Una vez que esten creados todos los modulos necesarios, podemos **eliminar el modulo** `project/` asi:
-
-	``$ make delete name=project`` 
-
-
-
-
- Hay que tener en cuenta que siempre que se quiera eliminar un modulo creado, debemos usar el comando ``make delete``. Si solo eliminamos la carpeta van a quedar rastros de este en algunos archivos del workspace.
- 
 
  ## Configurar VSCode
 - Instalar ultima version de [VSCode de 32bit](https://code.visualstudio.com/updates/v1_35) 
